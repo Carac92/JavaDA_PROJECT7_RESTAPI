@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,17 +22,17 @@ public class CurvePointTests {
 
 	@Test
 	public void curvePointTest() {
-		CurvePoint curvePoint = new CurvePoint(10, 10d, 30d);
+		CurvePoint curvePoint = new CurvePoint(1, 10d, 10d);
 
 		// Save
 		curvePoint = curvePointRepository.save(curvePoint);
 		Assert.assertNotNull(curvePoint.getId());
-		Assert.assertTrue(curvePoint.getCurveId() == 10);
+		Assert.assertTrue(curvePoint.getCurveId() == 1);
 
 		// Update
-		curvePoint.setCurveId(20);
+		curvePoint.setCurveId(2);
 		curvePoint = curvePointRepository.save(curvePoint);
-		Assert.assertTrue(curvePoint.getCurveId() == 20);
+		Assert.assertTrue(curvePoint.getCurveId() == 2);
 
 		// Find
 		List<CurvePoint> listResult = curvePointRepository.findAll();
