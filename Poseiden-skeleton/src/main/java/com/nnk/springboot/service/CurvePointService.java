@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -28,5 +29,9 @@ public class CurvePointService {
     public void deleteCurvePoint(Integer id){
         log.info("Deleting curvePoint");
         curvePointRepository.deleteById(id);
+    }
+
+    public Optional<CurvePoint> getCurvePointById(Integer id) {
+        return curvePointRepository.findById(id);
     }
 }

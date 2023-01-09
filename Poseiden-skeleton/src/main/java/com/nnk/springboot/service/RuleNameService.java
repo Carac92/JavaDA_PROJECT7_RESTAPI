@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -28,5 +29,9 @@ public class RuleNameService {
     public void deleteRuleName(Integer id){
         log.info("Deleting ruleName");
         ruleNameRepository.deleteById(id);
+    }
+
+    public Optional<RuleName> getRuleNameById(Integer id) {
+        return ruleNameRepository.findById(id);
     }
 }

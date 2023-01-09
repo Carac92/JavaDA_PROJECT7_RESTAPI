@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -28,5 +29,9 @@ public class RatingService {
     public void deleteRating(Integer id){
         log.info("Deleting rating");
         ratingRepository.deleteById(id);
+    }
+
+    public Optional<Rating> getRatingById(Integer id) {
+        return ratingRepository.findById(id);
     }
 }

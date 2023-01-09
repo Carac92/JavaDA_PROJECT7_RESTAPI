@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -32,5 +33,9 @@ public class BidListService {
     public void deleteBidList(Integer id){
         log.info("Deleting bidList");
         bidListRepository.deleteById(id);
+    }
+
+    public Optional<BidList> getBidListById(Integer id) {
+        return bidListRepository.findById(id);
     }
 }
