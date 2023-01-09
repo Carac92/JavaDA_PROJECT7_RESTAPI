@@ -3,8 +3,6 @@ p
 @Poseiden-skeleton/src/test/java/com/nnk/springboot/BidTests.java,d/8/d809274e38fe725c0f835d5a5011a3ffa44d8199
 †
 VPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/BidListRepository.java,4/9/49f6401ace25f180090a4a4f24a81541d56462c7
-s
-CPoseiden-skeleton/src/main/java/com/nnk/springboot/Application.java,6/b/6be407a569944fb5e46cb582f566e84dd074d842
 S
 #Poseiden-skeleton/doc/guideline.txt,b/b/bbb693090dc25796a8857d9eaa086436e33b0972
 …
