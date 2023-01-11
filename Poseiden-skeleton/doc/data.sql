@@ -93,6 +93,6 @@ CREATE TABLE users (
 
   PRIMARY KEY (id)
 );
-
-insert into users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
-insert into users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
+-- password=mdp123
+insert into users(fullname, username, password, role) values("Administrator", "admin", "$2a$12$xFDkTbbSoIdbDCD/IapX2umniit10wEdPrPrEnW5pqkVJHnQWjUQu", "ADMIN");
+insert into users(fullname, username, password, role) values("User", "user", "$2a$12$xFDkTbbSoIdbDCD/IapX2umniit10wEdPrPrEnW5pqkVJHnQWjUQu", "USER");

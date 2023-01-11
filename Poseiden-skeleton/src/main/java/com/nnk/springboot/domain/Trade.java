@@ -45,8 +45,8 @@ public class Trade {
 
     public Trade() {
     }
-    public Trade(String tradeAccount, String type) {
-        this.account = tradeAccount;
+    public Trade(String account, String type) {
+        this.account = account;
         this.type = type;
     }
 // TODO: Map columns in data table TRADE with corresponding java fields

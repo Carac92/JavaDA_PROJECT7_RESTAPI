@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllers;
 
+import com.nnk.springboot.config.PasswordSecurityVerification;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ import javax.validation.Valid;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordSecurityVerification passwordSecurityVerification;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @RequestMapping("/user/list")
     public String home(Model model)
@@ -33,12 +38,11 @@ public class UserController {
 
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
+        if (!result.hasErrors()&&passwordSecurityVerification.isValid(user.getPassword())) {
+                user.setPassword(encoder.encode(user.getPassword()));
+                userRepository.save(user);
+                model.addAttribute("users", userRepository.findAll());
+                return "redirect:/user/list";
         }
         return "user/add";
     }
@@ -54,16 +58,13 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "user/update";
+        if (!result.hasErrors()&&passwordSecurityVerification.isValid(user.getPassword())) {
+            user.setPassword(encoder.encode(user.getPassword()));
+            userRepository.save(user);
+            model.addAttribute("users", userRepository.findAll());
+            return "redirect:/user/list";
         }
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        return "user/update";
     }
 
     @GetMapping("/user/delete/{id}")

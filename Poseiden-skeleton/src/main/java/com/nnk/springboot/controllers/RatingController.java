@@ -22,7 +22,7 @@ public class RatingController {
     @RequestMapping("/rating/list")
     public String home(Model model) {
         // TODO: find all Rating, add to model
-        model.addAttribute("rating", ratingService.getRating());
+        model.addAttribute("ratings", ratingService.getRating());
         return "rating/list";
     }
 

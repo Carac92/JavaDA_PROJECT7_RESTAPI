@@ -6,17 +6,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.concurrent.TimeUnit;
 
-@EnableWebSecurity
 @Configuration
-public class SecurityConfig {
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled=true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
     @Bean
@@ -30,31 +33,31 @@ public class SecurityConfig {
         daoAuthenticationProvider.setUserDetailsService(userService);
         return daoAuthenticationProvider;
     }
-    @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/user/add", "/user/validate").permitAll()
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/bidList/**", "rating/**", "ruleName/**", "curvePoint/**", "trade/**")
+                .hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/user/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .usernameParameter("email")
+                .formLogin().permitAll()
+                .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/home",true)
+                .defaultSuccessUrl("/bidList/list",true)
                 .and()
                 .rememberMe()
                 .rememberMeParameter("remember-Me")
                 .key("somethingSecure")
-                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toDays(21))
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/app-logout"))
                 .logoutSuccessUrl("/login")
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied");
-        return http.build();
+                .accessDeniedPage("/app/error");
     }
 }

@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "rule_name")
 public class RuleName {
-
+// TODO: Map columns in data table RULENAME with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
@@ -25,13 +25,12 @@ public class RuleName {
 
     public RuleName() {
     }
-    public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
-        this.name = ruleName;
+    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
+        this.name = name;
         this.description = description;
         this.json = json;
         this.template = template;
-        this.sqlStr = sql;
+        this.sqlStr = sqlStr;
         this.sqlPart = sqlPart;
     }
-// TODO: Map columns in data table RULENAME with corresponding java fields
 }
