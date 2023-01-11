@@ -18,7 +18,7 @@ public class RuleNameServiceTest {
     @InjectMocks
     private RuleNameService ruleNameService;
     @Mock
-    private RuleNameRepository ruleNameRepository;
+    RuleNameRepository ruleNameRepository;
 
     @Test
     public void addRuleNameTest() {

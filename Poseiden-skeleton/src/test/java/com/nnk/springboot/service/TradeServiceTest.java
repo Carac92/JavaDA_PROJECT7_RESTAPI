@@ -18,7 +18,7 @@ public class TradeServiceTest {
     @InjectMocks
     private TradeService tradeService;
     @Mock
-    private TradeRepository tradeRepository;
+    TradeRepository tradeRepository;
 
     @Test
     public void addTradeTest() {

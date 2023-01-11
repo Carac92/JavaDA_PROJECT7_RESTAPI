@@ -17,7 +17,7 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
     @Mock
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Test
     public void testAddUser() {

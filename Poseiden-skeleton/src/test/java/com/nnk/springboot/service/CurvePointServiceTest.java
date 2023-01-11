@@ -19,7 +19,7 @@ public class CurvePointServiceTest {
     @InjectMocks
     private CurvePointService curvePointService;
     @Mock
-    private CurvePointRepository curvePointRepository;
+    CurvePointRepository curvePointRepository;
 
     @Test
     public void addCurvePointTest() {

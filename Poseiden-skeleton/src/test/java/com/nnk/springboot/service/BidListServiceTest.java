@@ -22,7 +22,7 @@ public class BidListServiceTest {
     private BidListService bidListService;
 
     @Mock
-    private BidListRepository bidListRepository;
+    BidListRepository bidListRepository;
 
     @Test
     public void saveBidListTest() {

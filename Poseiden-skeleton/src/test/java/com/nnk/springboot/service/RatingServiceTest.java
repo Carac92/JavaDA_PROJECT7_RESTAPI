@@ -16,7 +16,7 @@ public class RatingServiceTest {
     @InjectMocks
     private RatingService ratingService;
     @Mock
-    private RatingRepository ratingRepository;
+    RatingRepository ratingRepository;
 
     @Test
     public void testAddRating() {

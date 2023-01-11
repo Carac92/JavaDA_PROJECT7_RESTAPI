@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.Collection;
+
+@Entity
+@Table(name = &quot;users&quot;)
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+    @NotBlank(message = &quot;Username is mandatory&quot;)
+    private String username;
+    @NotBlank(message = &quot;Password is mandatory&quot;)
+    private String password;
+    @NotBlank(message = &quot;FullName is mandatory&quot;)
+    private String fullname;
+    @NotBlank(message = &quot;Role is mandatory&quot;)
+    private String role;
+
+<span class="fc" id="L25">    public User(String username, String password, String fullname, String role) {</span>
+<span class="fc" id="L26">        this.username = username;</span>
+<span class="fc" id="L27">        this.password = password;</span>
+<span class="fc" id="L28">        this.fullname = fullname;</span>
+<span class="fc" id="L29">        this.role = role;</span>
+<span class="fc" id="L30">    }</span>
+
+    public Integer getId() {
+<span class="fc" id="L33">        return id;</span>
+    }
+
+    public void setId(Integer id) {
+<span class="fc" id="L37">        this.id = id;</span>
+<span class="fc" id="L38">    }</span>
+
+    public String getUsername() {
+<span class="fc" id="L41">        return username;</span>
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+<span class="nc" id="L46">        return true;</span>
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+<span class="nc" id="L51">        return true;</span>
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+<span class="nc" id="L56">        return true;</span>
+    }
+
+    @Override
+    public boolean isEnabled() {
+<span class="nc" id="L61">        return true;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L65">        this.username = username;</span>
+<span class="nc" id="L66">    }</span>
+
+    @Override
+    public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {
+<span class="nc" id="L70">        return null;</span>
+    }
+
+    public String getPassword() {
+<span class="fc" id="L74">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="nc" id="L78">        this.password = password;</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getFullname() {
+<span class="fc" id="L82">        return fullname;</span>
+    }
+
+    public void setFullname(String fullname) {
+<span class="fc" id="L86">        this.fullname = fullname;</span>
+<span class="fc" id="L87">    }</span>
+
+    public String getRole() {
+<span class="fc" id="L90">        return role;</span>
+    }
+
+    public void setRole(String role) {
+<span class="nc" id="L94">        this.role = role;</span>
+<span class="nc" id="L95">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
