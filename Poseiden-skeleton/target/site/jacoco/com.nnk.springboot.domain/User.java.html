@@ -28,70 +28,72 @@ public class User implements UserDetails {
 <span class="fc" id="L28">        this.fullname = fullname;</span>
 <span class="fc" id="L29">        this.role = role;</span>
 <span class="fc" id="L30">    }</span>
+<span class="fc" id="L31">    public User() {</span>
+<span class="fc" id="L32">    }</span>
 
     public Integer getId() {
-<span class="fc" id="L33">        return id;</span>
+<span class="fc" id="L35">        return id;</span>
     }
 
     public void setId(Integer id) {
-<span class="fc" id="L37">        this.id = id;</span>
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L39">        this.id = id;</span>
+<span class="fc" id="L40">    }</span>
 
     public String getUsername() {
-<span class="fc" id="L41">        return username;</span>
+<span class="fc" id="L43">        return username;</span>
     }
 
     @Override
     public boolean isAccountNonExpired() {
-<span class="nc" id="L46">        return true;</span>
+<span class="nc" id="L48">        return true;</span>
     }
 
     @Override
     public boolean isAccountNonLocked() {
-<span class="nc" id="L51">        return true;</span>
+<span class="nc" id="L53">        return true;</span>
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-<span class="nc" id="L56">        return true;</span>
+<span class="nc" id="L58">        return true;</span>
     }
 
     @Override
     public boolean isEnabled() {
-<span class="nc" id="L61">        return true;</span>
+<span class="nc" id="L63">        return true;</span>
     }
 
     public void setUsername(String username) {
-<span class="nc" id="L65">        this.username = username;</span>
-<span class="nc" id="L66">    }</span>
+<span class="fc" id="L67">        this.username = username;</span>
+<span class="fc" id="L68">    }</span>
 
     @Override
     public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() {
-<span class="nc" id="L70">        return null;</span>
+<span class="nc" id="L72">        return null;</span>
     }
 
     public String getPassword() {
-<span class="fc" id="L74">        return password;</span>
+<span class="fc" id="L76">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="nc" id="L78">        this.password = password;</span>
-<span class="nc" id="L79">    }</span>
+<span class="fc" id="L80">        this.password = password;</span>
+<span class="fc" id="L81">    }</span>
 
     public String getFullname() {
-<span class="fc" id="L82">        return fullname;</span>
+<span class="fc" id="L84">        return fullname;</span>
     }
 
     public void setFullname(String fullname) {
-<span class="fc" id="L86">        this.fullname = fullname;</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L88">        this.fullname = fullname;</span>
+<span class="fc" id="L89">    }</span>
 
     public String getRole() {
-<span class="fc" id="L90">        return role;</span>
+<span class="fc" id="L92">        return role;</span>
     }
 
     public void setRole(String role) {
-<span class="nc" id="L94">        this.role = role;</span>
-<span class="nc" id="L95">    }</span>
+<span class="fc" id="L96">        this.role = role;</span>
+<span class="fc" id="L97">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

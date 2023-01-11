@@ -63,7 +63,7 @@ public class CurvePointServiceTest {
         CurvePoint curvePoint = new CurvePoint(1, 10d, 10d);
         curvePoint.setId(1);
         //WHEN
-        curvePointService.getCurvePoint();
+        curvePointService.getAllCurvePoint();
         //THEN
         verify(curvePointRepository,times(1)).findAll();
     }

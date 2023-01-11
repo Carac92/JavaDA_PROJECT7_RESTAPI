@@ -15,7 +15,7 @@ import java.util.Optional;
     @Autowired
     private CurvePointRepository curvePointRepository;
 
-    public List&lt;CurvePoint&gt; getCurvePoint(){
+    public List&lt;CurvePoint&gt; getAllCurvePoint(){
 <span class="fc" id="L19">        return curvePointRepository.findAll();</span>
     }
     public void addCurvePoint(CurvePoint curvePoint){

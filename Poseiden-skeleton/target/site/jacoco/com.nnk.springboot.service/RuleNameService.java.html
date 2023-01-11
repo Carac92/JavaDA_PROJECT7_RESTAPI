@@ -15,7 +15,7 @@ import java.util.Optional;
     @Autowired
     private RuleNameRepository ruleNameRepository;
 
-    public List&lt;RuleName&gt; getRuleName(){
+    public List&lt;RuleName&gt; getAllRuleName(){
 <span class="fc" id="L19">        return ruleNameRepository.findAll();</span>
     }
     public void addRuleName(RuleName ruleName){

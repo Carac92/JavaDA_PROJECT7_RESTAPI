@@ -18,11 +18,11 @@
 			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
 			 -->
 			<p>Curve Id</p>@
-			<input type="text" th:field="*{curveId}" th:name="curveId" class="form-control" placeholder="${curvePoint.curveId}"/>
+			<input type="text" th:field="*{curveId}" th:name="curveId" class="form-control" placeholder="${curve.curveId}"/>
 			<p>Term</p>
-			<input type="text" th:field="*{term}" th:name="term" class="form-control" placeholder="${curvePoint.term}"/>
+			<input type="text" th:field="*{term}" th:name="term" class="form-control" placeholder="${curve.term}"/>
 			<p>Value</p>
-			<input type="text" th:field="*{value}" th:name="value" class="form-control" placeholder="${curvePoint.value}"/>
+			<input type="text" th:field="*{value}" th:name="value" class="form-control" placeholder="${curve.value}"/>
 			<input type="submit" value="Update data" class="btn btn-primary btn-sm"/>
 			<a href="/curvePoint/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>

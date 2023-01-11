@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
-<span class="fc" id="L17">public class TradeController {</span>
+<span class="fc" id="L18">public class TradeController {</span>
     // TODO: Inject Trade service
     @Autowired
     private TradeService tradeService;
@@ -22,48 +23,52 @@ import javax.validation.Valid;
     @RequestMapping(&quot;/trade/list&quot;)
     public String home(Model model) {
         // TODO: find all Trade, add to model
-<span class="nc" id="L25">        model.addAttribute(&quot;trades&quot;, tradeService.getTrade());</span>
-<span class="nc" id="L26">        return &quot;trade/list&quot;;</span>
+<span class="fc" id="L26">        model.addAttribute(&quot;trades&quot;, tradeService.getAllTrade());</span>
+<span class="fc" id="L27">        return &quot;trade/list&quot;;</span>
     }
 
     @GetMapping(&quot;/trade/add&quot;)
     public String addUser(Trade bid) {
-<span class="nc" id="L31">        return &quot;trade/add&quot;;</span>
+<span class="fc" id="L32">        return &quot;trade/add&quot;;</span>
     }
 
     @PostMapping(&quot;/trade/validate&quot;)
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Trade list
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L38">            tradeService.addTrade(trade);</span>
-<span class="nc" id="L39">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L39">            tradeService.addTrade(trade);</span>
+<span class="fc" id="L40">            return &quot;redirect:/trade/list&quot;;</span>
         }
-<span class="nc" id="L41">        return &quot;trade/add&quot;;</span>
+<span class="nc" id="L42">        return &quot;trade/add&quot;;</span>
     }
 
     @GetMapping(&quot;/trade/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
         // TODO: get Trade by Id and to model then show to the form
-<span class="nc" id="L47">        model.addAttribute(&quot;trade&quot;, tradeService.getTradeById(id));</span>
-<span class="nc" id="L48">        return &quot;trade/update&quot;;</span>
+<span class="fc" id="L48">        Optional&lt;Trade&gt; trade = tradeService.getTradeById(id);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if(trade.isPresent()) {</span>
+<span class="fc" id="L50">            model.addAttribute(&quot;trade&quot;, trade.get());</span>
+<span class="fc" id="L51">            return &quot;trade/update&quot;;</span>
+        }
+<span class="nc" id="L53">        return &quot;trade/list&quot;;</span>
     }
 
     @PostMapping(&quot;/trade/update/{id}&quot;)
     public String updateTrade(@PathVariable(&quot;id&quot;) Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L56">            tradeService.updateTrade(trade);</span>
-<span class="nc" id="L57">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L61">            tradeService.updateTrade(trade);</span>
+<span class="fc" id="L62">            return &quot;redirect:/trade/list&quot;;</span>
         }
-<span class="nc" id="L59">        return &quot;redirect:/trade/update&quot;+ id;</span>
+<span class="nc" id="L64">        return &quot;redirect:/trade/update/{id}&quot;;</span>
     }
 
     @GetMapping(&quot;/trade/delete/{id}&quot;)
     public String deleteTrade(@PathVariable(&quot;id&quot;) Integer id, Model model) {
         // TODO: Find Trade by Id and delete the Trade, return to Trade list
-<span class="nc" id="L65">        tradeService.deleteTrade(id);</span>
-<span class="nc" id="L66">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L70">        tradeService.deleteTrade(id);</span>
+<span class="fc" id="L71">        return &quot;redirect:/trade/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

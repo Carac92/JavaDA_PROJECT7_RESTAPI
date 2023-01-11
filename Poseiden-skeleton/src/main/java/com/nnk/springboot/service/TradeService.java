@@ -15,7 +15,7 @@ public class TradeService {
     @Autowired
     private TradeRepository tradeRepository;
 
-    public List<Trade> getTrade(){
+    public List<Trade> getAllTrade(){
         return tradeRepository.findAll();
     }
     public void addTrade(Trade trade){

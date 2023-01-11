@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class RatingController {
@@ -22,7 +23,7 @@ public class RatingController {
     @RequestMapping("/rating/list")
     public String home(Model model) {
         // TODO: find all Rating, add to model
-        model.addAttribute("ratings", ratingService.getRating());
+        model.addAttribute("ratings", ratingService.getAllRating());
         return "rating/list";
     }
 
@@ -43,9 +44,13 @@ public class RatingController {
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Rating by Id and to model then show to the form
+        Optional<Rating> rating = ratingService.getRatingById(id);
+        if (rating.isPresent()) {
+            model.addAttribute("rating", rating.get());
+            return "rating/update";
+        }
         model.addAttribute("rating", ratingService.getRatingById(id));
-        return "rating/update";
+        return "rating/list";
     }
 
     @PostMapping("/rating/update/{id}")
@@ -56,7 +61,7 @@ public class RatingController {
             ratingService.updateRating(rating);
             return "redirect:/rating/list";
         }
-        return "redirect:/rating/update";
+        return "redirect:/rating/update/{id}";
     }
 
     @GetMapping("/rating/delete/{id}")

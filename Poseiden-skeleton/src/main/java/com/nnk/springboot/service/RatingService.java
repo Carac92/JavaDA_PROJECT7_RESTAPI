@@ -15,7 +15,7 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-    public List<Rating> getRating(){
+    public List<Rating> getAllRating(){
         return ratingRepository.findAll();
     }
     public void addRating(Rating rating){

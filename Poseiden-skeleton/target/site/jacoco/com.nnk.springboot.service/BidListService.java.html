@@ -16,7 +16,7 @@ import java.util.Optional;
     @Autowired
     private BidListRepository bidListRepository;
 
-    public List&lt;BidList&gt; getBidList() {
+    public List&lt;BidList&gt; getAllBidList() {
 <span class="nc" id="L20">        return bidListRepository.findAll();</span>
     }
     @Transactional

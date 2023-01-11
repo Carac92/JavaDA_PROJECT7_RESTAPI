@@ -16,7 +16,7 @@ public class BidListService {
     @Autowired
     private BidListRepository bidListRepository;
 
-    public List<BidList> getBidList() {
+    public List<BidList> getAllBidList() {
         return bidListRepository.findAll();
     }
     @Transactional

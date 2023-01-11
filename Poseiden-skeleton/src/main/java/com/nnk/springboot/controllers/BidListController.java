@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.BidListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class BidListController {
     @RequestMapping("/bidList/list")
     public String home(Model model) {
         // TODO: call service find all bids to show to the view
-        List<BidList> bidList = bidListService.getBidList();
+        List<BidList> bidList = bidListService.getAllBidList();
         model.addAttribute("bidList", bidList);
         return "bidList/list";
     }
@@ -64,7 +63,7 @@ public class BidListController {
             bidListService.updateBidList(bidList);
             return "redirect:/bidList/list";
         }
-        return "redirect:/bidList/list";
+        return "redirect:/bidList/update/{id}";
     }
 
     @GetMapping("/bidList/delete/{id}")

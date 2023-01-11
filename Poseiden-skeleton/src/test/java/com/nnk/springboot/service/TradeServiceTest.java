@@ -73,7 +73,7 @@ public class TradeServiceTest {
         trade.setId(1);
         Integer id = trade.getId();
         //WHEN
-        tradeService.getTrade();
+        tradeService.getAllTrade();
         //THEN
         verify(tradeRepository, times(1)).findAll();
     }

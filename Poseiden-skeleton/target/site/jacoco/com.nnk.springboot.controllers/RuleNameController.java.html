@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
-<span class="fc" id="L17">public class RuleNameController {</span>
+<span class="fc" id="L18">public class RuleNameController {</span>
     // TODO: Inject RuleName service
     @Autowired
     private RuleNameService ruleNameService;
@@ -22,48 +23,52 @@ import javax.validation.Valid;
     @RequestMapping(&quot;/ruleName/list&quot;)
     public String home(Model model) {
         // TODO: find all RuleName, add to model
-<span class="nc" id="L25">        model.addAttribute(&quot;ruleName&quot;, ruleNameService.getRuleName());</span>
-<span class="nc" id="L26">        return &quot;ruleName/list&quot;;</span>
+<span class="fc" id="L26">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.getAllRuleName());</span>
+<span class="fc" id="L27">        return &quot;ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/add&quot;)
     public String addRuleForm(RuleName bid) {
-<span class="nc" id="L31">        return &quot;ruleName/add&quot;;</span>
+<span class="fc" id="L32">        return &quot;ruleName/add&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return RuleName list
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L38">            ruleNameService.addRuleName(ruleName);</span>
-<span class="nc" id="L39">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L39">            ruleNameService.addRuleName(ruleName);</span>
+<span class="fc" id="L40">            return &quot;redirect:/ruleName/list&quot;;</span>
         }
-<span class="nc" id="L41">        return &quot;ruleName/add&quot;;</span>
+<span class="nc" id="L42">        return &quot;ruleName/add&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
-<span class="nc" id="L47">        model.addAttribute(&quot;ruleName&quot;, ruleNameService.getRuleNameById(id));</span>
-<span class="nc" id="L48">        return &quot;ruleName/update&quot;;</span>
+<span class="fc" id="L48">        Optional&lt;RuleName&gt; ruleName = ruleNameService.getRuleNameById(id);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if(ruleName.isPresent()) {</span>
+<span class="fc" id="L50">            model.addAttribute(&quot;ruleName&quot;, ruleName.get());</span>
+<span class="fc" id="L51">            return &quot;ruleName/update&quot;;</span>
+        }
+<span class="nc" id="L53">        return &quot;ruleName/list&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/update/{id}&quot;)
     public String updateRuleName(@PathVariable(&quot;id&quot;) Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L56">            ruleNameService.updateRuleName(ruleName);</span>
-<span class="nc" id="L57">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L61">            ruleNameService.updateRuleName(ruleName);</span>
+<span class="fc" id="L62">            return &quot;redirect:/ruleName/list&quot;;</span>
         }
-<span class="nc" id="L59">        return &quot;redirect:/ruleName/update&quot;+ id;</span>
+<span class="nc" id="L64">        return &quot;redirect:/ruleName/update/{id}&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
         // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-<span class="nc" id="L65">        ruleNameService.deleteRuleName(id);</span>
-<span class="nc" id="L66">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L70">        ruleNameService.deleteRuleName(id);</span>
+<span class="fc" id="L71">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

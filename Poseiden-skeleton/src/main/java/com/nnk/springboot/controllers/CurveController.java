@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class CurveController {
@@ -22,7 +23,7 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
         // TODO: find all Curve Point, add to model
-        model.addAttribute("curvePoint", curvePointService.getCurvePoint());
+        model.addAttribute("curvePointList", curvePointService.getAllCurvePoint());
         return "curvePoint/list";
     }
 
@@ -44,8 +45,12 @@ public class CurveController {
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get CurvePoint by Id and to model then show to the form
-        model.addAttribute("curvePoint", curvePointService.getCurvePointById(id));
-        return "curvePoint/update";
+        Optional<CurvePoint> curvePoint = curvePointService.getCurvePointById(id);
+        if(curvePoint.isPresent()) {
+            model.addAttribute("curvePoint", curvePoint.get());
+            return "curvePoint/update";
+        }
+        return "redirect:/curvePoint/list";
     }
 
     @PostMapping("/curvePoint/update/{id}")
@@ -56,7 +61,7 @@ public class CurveController {
             curvePointService.updateCurvePoint(curvePoint);
             return "redirect:/curvePoint/list";
         }
-        return "redirect:/curvePoint/list";
+        return "redirect:/curvePoint/update/{id}";
     }
 
     @GetMapping("/curvePoint/delete/{id}")

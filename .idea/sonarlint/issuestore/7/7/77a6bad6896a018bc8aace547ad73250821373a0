@@ -1,0 +1,9 @@
+
+{
+java:S3305"`Inject this field value directly into "daoAuthenticationProvider", the only method that uses it.(¶òÁÈùÿÿÿÿ
+P
+java:S1161D":Add the "@Override" annotation above this method signature(öÁâ
+L
+java:S6437F"6Revoke and change this password, as it is compromised.(ãæıô
+n
+java:S1128"QRemove this unused import 'org.springframework.security.web.SecurityFilterChain'.(Ï×ÜÌ8«½š‚Ú0

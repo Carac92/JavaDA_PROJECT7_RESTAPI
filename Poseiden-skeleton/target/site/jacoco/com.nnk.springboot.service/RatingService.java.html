@@ -15,7 +15,7 @@ import java.util.Optional;
     @Autowired
     private RatingRepository ratingRepository;
 
-    public List&lt;Rating&gt; getRating(){
+    public List&lt;Rating&gt; getAllRating(){
 <span class="fc" id="L19">        return ratingRepository.findAll();</span>
     }
     public void addRating(Rating rating){

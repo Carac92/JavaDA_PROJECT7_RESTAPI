@@ -15,7 +15,7 @@ public class CurvePointService {
     @Autowired
     private CurvePointRepository curvePointRepository;
 
-    public List<CurvePoint> getCurvePoint(){
+    public List<CurvePoint> getAllCurvePoint(){
         return curvePointRepository.findAll();
     }
     public void addCurvePoint(CurvePoint curvePoint){

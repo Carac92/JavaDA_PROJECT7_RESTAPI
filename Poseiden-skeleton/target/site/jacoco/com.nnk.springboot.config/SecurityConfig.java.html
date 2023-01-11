@@ -10,7 +10,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,46 +22,55 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
-<span class="fc" id="L22">public class SecurityConfig extends WebSecurityConfigurerAdapter {</span>
+<span class="fc" id="L25">public class SecurityConfig extends WebSecurityConfigurerAdapter {</span>
     @Autowired
     private UserService userService;
     @Bean
     BCryptPasswordEncoder encoder() {
-<span class="fc" id="L27">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L30">        return new BCryptPasswordEncoder();</span>
     }
     @Bean
     public AuthenticationProvider daoAuthenticationProvider(){
-<span class="fc" id="L31">        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();</span>
-<span class="fc" id="L32">        daoAuthenticationProvider.setPasswordEncoder(encoder());</span>
-<span class="fc" id="L33">        daoAuthenticationProvider.setUserDetailsService(userService);</span>
-<span class="fc" id="L34">        return daoAuthenticationProvider;</span>
+<span class="fc" id="L34">        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();</span>
+<span class="fc" id="L35">        daoAuthenticationProvider.setPasswordEncoder(encoder());</span>
+<span class="fc" id="L36">        daoAuthenticationProvider.setUserDetailsService(userService);</span>
+<span class="fc" id="L37">        return daoAuthenticationProvider;</span>
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-<span class="fc" id="L39">        http.authorizeRequests()</span>
-<span class="fc" id="L40">                .antMatchers(&quot;/bidList/**&quot;, &quot;rating/**&quot;, &quot;ruleName/**&quot;, &quot;curvePoint/**&quot;, &quot;trade/**&quot;)</span>
-<span class="fc" id="L41">                .hasAnyAuthority(&quot;ADMIN&quot;, &quot;USER&quot;)</span>
-<span class="fc" id="L42">                .antMatchers(&quot;/user/**&quot;).permitAll()</span>
-<span class="fc" id="L43">                .anyRequest()</span>
-<span class="fc" id="L44">                .authenticated()</span>
-<span class="fc" id="L45">                .and()</span>
-<span class="fc" id="L46">                .formLogin().permitAll()</span>
-<span class="fc" id="L47">                .usernameParameter(&quot;username&quot;)</span>
-<span class="fc" id="L48">                .passwordParameter(&quot;password&quot;)</span>
-<span class="fc" id="L49">                .defaultSuccessUrl(&quot;/bidList/list&quot;,true)</span>
-<span class="fc" id="L50">                .and()</span>
-<span class="fc" id="L51">                .rememberMe()</span>
-<span class="fc" id="L52">                .rememberMeParameter(&quot;remember-Me&quot;)</span>
-<span class="fc" id="L53">                .key(&quot;somethingSecure&quot;)</span>
-<span class="fc" id="L54">                .tokenValiditySeconds((int) TimeUnit.DAYS.toDays(21))</span>
-<span class="fc" id="L55">                .and()</span>
-<span class="fc" id="L56">                .logout()</span>
-<span class="fc" id="L57">                .logoutRequestMatcher(new AntPathRequestMatcher(&quot;/app-logout&quot;))</span>
-<span class="fc" id="L58">                .logoutSuccessUrl(&quot;/login&quot;)</span>
-<span class="fc" id="L59">                .and()</span>
-<span class="fc" id="L60">                .exceptionHandling()</span>
-<span class="fc" id="L61">                .accessDeniedPage(&quot;/app/error&quot;);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L42">        http.authorizeRequests()</span>
+<span class="fc" id="L43">                .antMatchers(&quot;/bidList/**&quot;, &quot;rating/**&quot;, &quot;ruleName/**&quot;, &quot;curvePoint/**&quot;, &quot;trade/**&quot;)</span>
+<span class="fc" id="L44">                .hasAnyAuthority(&quot;ADMIN&quot;, &quot;USER&quot;)</span>
+<span class="fc" id="L45">                .antMatchers(&quot;/user/**&quot;).permitAll()</span>
+<span class="fc" id="L46">                .anyRequest()</span>
+<span class="fc" id="L47">                .authenticated()</span>
+<span class="fc" id="L48">                .and()</span>
+<span class="fc" id="L49">                .formLogin().permitAll()</span>
+<span class="fc" id="L50">                .usernameParameter(&quot;username&quot;)</span>
+<span class="fc" id="L51">                .passwordParameter(&quot;password&quot;)</span>
+<span class="fc" id="L52">                .defaultSuccessUrl(&quot;/bidList/list&quot;,true)</span>
+<span class="fc" id="L53">                .and()</span>
+<span class="fc" id="L54">                .rememberMe()</span>
+<span class="fc" id="L55">                .rememberMeParameter(&quot;remember-Me&quot;)</span>
+<span class="fc" id="L56">                .key(&quot;somethingSecure&quot;)</span>
+<span class="fc" id="L57">                .tokenValiditySeconds((int) TimeUnit.DAYS.toDays(21))</span>
+<span class="fc" id="L58">                .and()</span>
+<span class="fc" id="L59">                .logout()</span>
+<span class="fc" id="L60">                .logoutRequestMatcher(new AntPathRequestMatcher(&quot;/app-logout&quot;))</span>
+<span class="fc" id="L61">                .logoutSuccessUrl(&quot;/login&quot;)</span>
+<span class="fc" id="L62">                .and()</span>
+<span class="fc" id="L63">                .exceptionHandling()</span>
+<span class="fc" id="L64">                .accessDeniedPage(&quot;/app/error&quot;);</span>
+<span class="fc" id="L65">    }</span>
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+<span class="fc" id="L69">        UserDetails admin = User.withUsername(&quot;admin&quot;)</span>
+<span class="fc" id="L70">                .password(encoder().encode(&quot;password&quot;))</span>
+<span class="fc" id="L71">                .roles(&quot;ADMIN&quot;)</span>
+<span class="fc" id="L72">                .build();</span>
+<span class="fc" id="L73">        return new InMemoryUserDetailsManager(admin);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

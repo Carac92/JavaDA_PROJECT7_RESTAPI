@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class RuleNameController {
@@ -22,7 +23,7 @@ public class RuleNameController {
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
         // TODO: find all RuleName, add to model
-        model.addAttribute("ruleName", ruleNameService.getRuleName());
+        model.addAttribute("ruleNames", ruleNameService.getAllRuleName());
         return "ruleName/list";
     }
 
@@ -44,8 +45,12 @@ public class RuleNameController {
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
-        model.addAttribute("ruleName", ruleNameService.getRuleNameById(id));
-        return "ruleName/update";
+        Optional<RuleName> ruleName = ruleNameService.getRuleNameById(id);
+        if(ruleName.isPresent()) {
+            model.addAttribute("ruleName", ruleName.get());
+            return "ruleName/update";
+        }
+        return "ruleName/list";
     }
 
     @PostMapping("/ruleName/update/{id}")
@@ -56,7 +61,7 @@ public class RuleNameController {
             ruleNameService.updateRuleName(ruleName);
             return "redirect:/ruleName/list";
         }
-        return "redirect:/ruleName/update"+ id;
+        return "redirect:/ruleName/update/{id}";
     }
 
     @GetMapping("/ruleName/delete/{id}")

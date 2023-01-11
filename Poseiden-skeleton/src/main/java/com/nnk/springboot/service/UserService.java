@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -38,6 +40,10 @@ public class UserService implements UserDetailsService {
         log.info("Adding user");
         userRepository.save(user);
     }
+    public List<User> getAllUsers(){
+        log.info("Getting all users");
+        return userRepository.findAll();
+    }
     public void updateUser(User user){
         log.info("Updating user");
         userRepository.save(user);
@@ -45,5 +51,9 @@ public class UserService implements UserDetailsService {
     public void deleteUser(Integer id){
         log.info("Deleting user");
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
     }
 }

@@ -23,18 +23,17 @@
 			<p>Rule Description</p>
 			<input type="text" th:field="*{description}" th:name="description" class="form-control" placeholder="Rule Description"/>
 			<p>Json</p>
-			<input type="file" th:field="*{json}" th:name="json" class="form-control" placeholder="Json"/>
+			<input type="text" th:field="*{json}" th:name="json" class="form-control" placeholder="Json"/>
 			<p>Template</p>
-			<input type="file" th:field="*{template}" th:name="template" class="form-control" placeholder="Template"/>
+			<input type="text" th:field="*{template}" th:name="template" class="form-control" placeholder="Template"/>
 			<p>Sql String</p>
-			<input type="text" th:field="*{sqlString}" th:name="sqlString" class="form-control" placeholder="Sql String"/>
+			<input type="text" th:field="*{sqlStr}" th:name="sqlString" class="form-control" placeholder="Sql String"/>
 			<p>Sql Part</p>
 			<input type="text" th:field="*{sqlPart}" th:name="sqlPart" class="form-control" placeholder="Sql Part"/>
 			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
 			<a href="/ruleName/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>
 	</div>
-
 </div>
 </body>
 </html>

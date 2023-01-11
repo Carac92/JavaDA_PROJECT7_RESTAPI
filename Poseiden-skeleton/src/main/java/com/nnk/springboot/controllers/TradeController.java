@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class TradeController {
@@ -22,7 +23,7 @@ public class TradeController {
     @RequestMapping("/trade/list")
     public String home(Model model) {
         // TODO: find all Trade, add to model
-        model.addAttribute("trades", tradeService.getTrade());
+        model.addAttribute("trades", tradeService.getAllTrade());
         return "trade/list";
     }
 
@@ -44,8 +45,12 @@ public class TradeController {
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Trade by Id and to model then show to the form
-        model.addAttribute("trade", tradeService.getTradeById(id));
-        return "trade/update";
+        Optional<Trade> trade = tradeService.getTradeById(id);
+        if(trade.isPresent()) {
+            model.addAttribute("trade", trade.get());
+            return "trade/update";
+        }
+        return "trade/list";
     }
 
     @PostMapping("/trade/update/{id}")
@@ -56,7 +61,7 @@ public class TradeController {
             tradeService.updateTrade(trade);
             return "redirect:/trade/list";
         }
-        return "redirect:/trade/update"+ id;
+        return "redirect:/trade/update/{id}";
     }
 
     @GetMapping("/trade/delete/{id}")

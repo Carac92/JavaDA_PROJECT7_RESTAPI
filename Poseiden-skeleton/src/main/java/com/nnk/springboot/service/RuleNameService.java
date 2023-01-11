@@ -15,7 +15,7 @@ public class RuleNameService {
     @Autowired
     private RuleNameRepository ruleNameRepository;
 
-    public List<RuleName> getRuleName(){
+    public List<RuleName> getAllRuleName(){
         return ruleNameRepository.findAll();
     }
     public void addRuleName(RuleName ruleName){

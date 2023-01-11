@@ -43,7 +43,7 @@ public class RuleNameServiceTest {
     @Test
     public void getAllRuleNameTest() {
         //WHEN
-        ruleNameService.getRuleName();
+        ruleNameService.getAllRuleName();
         //THEN
         verify(ruleNameRepository,times(1)).findAll();
     }

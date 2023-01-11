@@ -28,6 +28,8 @@ public class User implements UserDetails {
         this.fullname = fullname;
         this.role = role;
     }
+    public User() {
+    }
 
     public Integer getId() {
         return id;

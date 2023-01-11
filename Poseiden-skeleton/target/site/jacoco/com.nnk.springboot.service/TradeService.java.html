@@ -15,7 +15,7 @@ import java.util.Optional;
     @Autowired
     private TradeRepository tradeRepository;
 
-    public List&lt;Trade&gt; getTrade(){
+    public List&lt;Trade&gt; getAllTrade(){
 <span class="fc" id="L19">        return tradeRepository.findAll();</span>
     }
     public void addTrade(Trade trade){

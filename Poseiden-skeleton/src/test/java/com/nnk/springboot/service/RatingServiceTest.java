@@ -48,7 +48,7 @@ public class RatingServiceTest {
     @Test
     public void testGetAllRating() {
         // WHEN
-        ratingService.getRating();
+        ratingService.getAllRating();
         // THEN
         verify(ratingRepository,times(1)).findAll();
     }

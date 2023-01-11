@@ -3,32 +3,35 @@
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
 @Entity
-<span class="pc bnc" id="L11" title="All 54 branches missed.">@Data</span>
+<span class="pc bnc" id="L13" title="All 54 branches missed.">@Data</span>
 @Table(name = &quot;curve_point&quot;)
 public class CurvePoint {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @NotNull(message = &quot;must not be null&quot;)
-<span class="fc" id="L18">    private Integer id;</span>
-<span class="fc" id="L19">    private Integer curveId;</span>
-<span class="nc" id="L20">    private Timestamp asOfDate;</span>
-<span class="fc" id="L21">    private Double term;</span>
-<span class="fc" id="L22">    private Double value;</span>
-<span class="nc" id="L23">    private Timestamp creationDate;</span>
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<span class="fc" id="L19">    private Integer id;</span>
+
+<span class="fc" id="L21">    private Integer curveId;</span>
+<span class="fc" id="L22">    private Timestamp asOfDate;</span>
+<span class="fc" id="L23">    private Double term;</span>
+
+<span class="fc" id="L25">    private Double value;</span>
+<span class="fc" id="L26">    private Timestamp creationDate;</span>
 
 // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 
-<span class="fc" id="L27">    public CurvePoint(){}</span>
-<span class="fc" id="L28">    public CurvePoint(Integer curveId, Double term, Double value){</span>
-<span class="fc" id="L29">        this.curveId = curveId;</span>
-<span class="fc" id="L30">        this.term = term;</span>
-<span class="fc" id="L31">        this.value = value;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L30">    public CurvePoint(){}</span>
+<span class="fc" id="L31">    public CurvePoint(Integer curveId, Double term, Double value){</span>
+<span class="fc" id="L32">        this.curveId = curveId;</span>
+<span class="fc" id="L33">        this.term = term;</span>
+<span class="fc" id="L34">        this.value = value;</span>
+<span class="fc" id="L35">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

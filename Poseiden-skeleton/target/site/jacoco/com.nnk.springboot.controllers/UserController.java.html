@@ -3,6 +3,7 @@
 import com.nnk.springboot.config.PasswordSecurityVerification;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,63 +17,62 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-<span class="fc" id="L19">public class UserController {</span>
+<span class="fc" id="L20">public class UserController {</span>
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private PasswordSecurityVerification passwordSecurityVerification;
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+
 
     @RequestMapping(&quot;/user/list&quot;)
     public String home(Model model)
     {
-<span class="nc" id="L30">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L31">        return &quot;user/list&quot;;</span>
+<span class="fc" id="L30">        model.addAttribute(&quot;users&quot;, userService.getAllUsers());</span>
+<span class="fc" id="L31">        return &quot;user/list&quot;;</span>
     }
 
     @GetMapping(&quot;/user/add&quot;)
     public String addUser(User bid) {
-<span class="nc" id="L36">        return &quot;user/add&quot;;</span>
+<span class="fc" id="L36">        return &quot;user/add&quot;;</span>
     }
 
     @PostMapping(&quot;/user/validate&quot;)
     public String validate(@Valid User user, BindingResult result, Model model) {
-<span class="nc bnc" id="L41" title="All 4 branches missed.">        if (!result.hasErrors()&amp;&amp;passwordSecurityVerification.isValid(user.getPassword())) {</span>
-<span class="nc" id="L42">                user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L43">                userRepository.save(user);</span>
-<span class="nc" id="L44">                model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L45">                return &quot;redirect:/user/list&quot;;</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L42">                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));</span>
+<span class="fc" id="L43">                userService.addUser(user);</span>
+<span class="fc" id="L44">                model.addAttribute(&quot;users&quot;, userService.getAllUsers());</span>
+<span class="fc" id="L45">                return &quot;redirect:/user/list&quot;;</span>
         }
 <span class="nc" id="L47">        return &quot;user/add&quot;;</span>
     }
 
     @GetMapping(&quot;/user/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L52">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L53">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L54">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L55">        return &quot;user/update&quot;;</span>
+<span class="pc" id="L52">        User user = userService.getUserById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L53">        user.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L54">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L55">        return &quot;user/update&quot;;</span>
     }
 
     @PostMapping(&quot;/user/update/{id}&quot;)
     public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
                              BindingResult result, Model model) {
-<span class="nc bnc" id="L61" title="All 4 branches missed.">        if (!result.hasErrors()&amp;&amp;passwordSecurityVerification.isValid(user.getPassword())) {</span>
-<span class="nc" id="L62">            user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L63">            userRepository.save(user);</span>
-<span class="nc" id="L64">            model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L65">            return &quot;redirect:/user/list&quot;;</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L62">            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));</span>
+<span class="fc" id="L63">            userService.updateUser(user);</span>
+<span class="fc" id="L64">            model.addAttribute(&quot;users&quot;, userService.getAllUsers());</span>
+<span class="fc" id="L65">            return &quot;redirect:/user/list&quot;;</span>
         }
-<span class="nc" id="L67">        return &quot;user/update&quot;;</span>
+<span class="nc" id="L67">        return &quot;user/update/{id}&quot;;</span>
     }
 
     @GetMapping(&quot;/user/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L72">        User user = userRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L73">        userRepository.delete(user);</span>
-<span class="nc" id="L74">        model.addAttribute(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L75">        return &quot;redirect:/user/list&quot;;</span>
+<span class="pc" id="L72">        User user = userService.getUserById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L73">        userService.deleteUser(id);</span>
+<span class="fc" id="L74">        model.addAttribute(&quot;users&quot;, userService.getAllUsers());</span>
+<span class="fc" id="L75">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
