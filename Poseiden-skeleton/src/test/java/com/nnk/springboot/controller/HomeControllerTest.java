@@ -12,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit test for HomeController
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(HomeController.class)
 @WithMockUser
@@ -21,7 +24,9 @@ public class HomeControllerTest {
 
     @Test
     public void home() throws Exception {
+        //WHEN
         mvc.perform(get("/"))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"));
     }

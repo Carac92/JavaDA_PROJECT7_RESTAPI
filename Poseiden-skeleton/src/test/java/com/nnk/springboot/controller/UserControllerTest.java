@@ -22,6 +22,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit test for UserController
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
 @WithMockUser
@@ -35,50 +38,66 @@ public class UserControllerTest {
 
     @Test
     public void home() throws Exception {
+        //WHEN
         mvc.perform(get("/user/list").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/list"))
                 .andExpect(model().attributeExists("users"));
     }
     @Test
     public void addUser() throws Exception {
+        //WHEN
         mvc.perform(get("/user/add").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/add"))
                 .andExpect(model().attributeExists("user"));
     }
     @Test
     public void validate() throws Exception {
+        //WHEN
+        when(passwordSecurityVerification.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("username=username&fullname=fullname&password=password&role=USER")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/user/list"));
     }
     @Test
     public void showUpdateForm() throws Exception {
+        //GIVEN
         User user = new User("username", "fullname", "password", "USER");
+        //WHEN
         when(userService.getUserById(1)).thenReturn(Optional.of(user));
         mvc.perform(get("/user/update/1").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/update"))
                 .andExpect(model().attributeExists("user"));
     }
     @Test
     public void updateUser() throws Exception {
+        //WHEN
+        when(passwordSecurityVerification.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("username=username&fullname=fullname&password=password&role=USER")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/user/list"));
     }
     @Test
     public void deleteUser() throws Exception {
+        //GIVEN
         User user = new User("username", "fullname", "password", "USER");
+        //WHEN
         when(userService.getUserById(1)).thenReturn(Optional.of(user));
         mvc.perform(get("/user/delete/1").with(csrf()))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/user/list"));
     }

@@ -14,6 +14,9 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test for CurvePointService
+ */
 @RunWith(SpringRunner.class)
 public class CurvePointServiceTest {
     @InjectMocks

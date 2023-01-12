@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
+/**
+ * The entity User implements UserDetails.
+ */
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -28,6 +31,7 @@ public class User implements UserDetails {
         this.fullname = fullname;
         this.role = role;
     }
+
     public User() {
     }
 

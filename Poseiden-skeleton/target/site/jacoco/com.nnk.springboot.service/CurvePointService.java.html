@@ -9,30 +9,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-<span class="fc" id="L12">@Log4j2</span>
+/**
+ * The type Curve point service. Autowired CurvePointRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
+<span class="fc" id="L17">@Log4j2</span>
 @Service
-<span class="fc" id="L14">public class CurvePointService {</span>
+<span class="fc" id="L19">public class CurvePointService {</span>
     @Autowired
     private CurvePointRepository curvePointRepository;
 
     public List&lt;CurvePoint&gt; getAllCurvePoint(){
-<span class="fc" id="L19">        return curvePointRepository.findAll();</span>
+<span class="fc" id="L24">        return curvePointRepository.findAll();</span>
     }
+
     public void addCurvePoint(CurvePoint curvePoint){
-<span class="fc" id="L22">        log.info(&quot;Adding curvePoint&quot;);</span>
-<span class="fc" id="L23">        curvePointRepository.save(curvePoint);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L28">        log.info(&quot;Adding curvePoint&quot;);</span>
+<span class="fc" id="L29">        curvePointRepository.save(curvePoint);</span>
+<span class="fc" id="L30">    }</span>
+
     public void updateCurvePoint(CurvePoint curvePoint){
-<span class="fc" id="L26">        log.info(&quot;Updating curvePoint&quot;);</span>
-<span class="fc" id="L27">        curvePointRepository.save(curvePoint);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L33">        log.info(&quot;Updating curvePoint&quot;);</span>
+<span class="fc" id="L34">        curvePointRepository.save(curvePoint);</span>
+<span class="fc" id="L35">    }</span>
+
     public void deleteCurvePoint(Integer id){
-<span class="fc" id="L30">        log.info(&quot;Deleting curvePoint&quot;);</span>
-<span class="fc" id="L31">        curvePointRepository.deleteById(id);</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L38">        log.info(&quot;Deleting curvePoint&quot;);</span>
+<span class="fc" id="L39">        curvePointRepository.deleteById(id);</span>
+<span class="fc" id="L40">    }</span>
 
     public Optional&lt;CurvePoint&gt; getCurvePointById(Integer id) {
-<span class="fc" id="L35">        return curvePointRepository.findById(id);</span>
+<span class="fc" id="L43">        return curvePointRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

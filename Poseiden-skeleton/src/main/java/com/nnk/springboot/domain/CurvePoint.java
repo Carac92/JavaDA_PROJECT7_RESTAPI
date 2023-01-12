@@ -1,16 +1,20 @@
 package com.nnk.springboot.domain;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 
+/**
+ * The Entity Curve point.
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "curve_point")
 public class CurvePoint {
 
@@ -25,12 +29,20 @@ public class CurvePoint {
     private Double value;
     private Timestamp creationDate;
 
-// TODO: Map columns in data table CURVEPOINT with corresponding java fields
 
     public CurvePoint(){}
+
     public CurvePoint(Integer curveId, Double term, Double value){
         this.curveId = curveId;
         this.term = term;
         this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CurvePoint that = (CurvePoint) o;
+        return id != null && Objects.equals(id, that.id);
     }
 }

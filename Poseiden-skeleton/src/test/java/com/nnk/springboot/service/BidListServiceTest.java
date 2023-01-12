@@ -15,6 +15,9 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test for BidListService
+ */
 @RunWith(SpringRunner.class)
 public class BidListServiceTest {
 

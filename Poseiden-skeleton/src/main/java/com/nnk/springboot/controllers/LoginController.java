@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * The type Login controller.
+ * This controller is used to manage the login page
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {

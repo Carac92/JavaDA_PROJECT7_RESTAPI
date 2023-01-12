@@ -9,30 +9,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Rule name service. Autowired RuleNameRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Service
-<span class="fc" id="L13">@Log4j2</span>
-<span class="fc" id="L14">public class RuleNameService {</span>
+<span class="fc" id="L18">@Log4j2</span>
+<span class="fc" id="L19">public class RuleNameService {</span>
     @Autowired
     private RuleNameRepository ruleNameRepository;
 
     public List&lt;RuleName&gt; getAllRuleName(){
-<span class="fc" id="L19">        return ruleNameRepository.findAll();</span>
+<span class="fc" id="L24">        return ruleNameRepository.findAll();</span>
     }
+
     public void addRuleName(RuleName ruleName){
-<span class="fc" id="L22">        log.info(&quot;Adding ruleName&quot;);</span>
-<span class="fc" id="L23">        ruleNameRepository.save(ruleName);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L28">        log.info(&quot;Adding ruleName&quot;);</span>
+<span class="fc" id="L29">        ruleNameRepository.save(ruleName);</span>
+<span class="fc" id="L30">    }</span>
+
     public void updateRuleName(RuleName ruleName){
-<span class="fc" id="L26">        log.info(&quot;Updating ruleName&quot;);</span>
-<span class="fc" id="L27">        ruleNameRepository.save(ruleName);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L33">        log.info(&quot;Updating ruleName&quot;);</span>
+<span class="fc" id="L34">        ruleNameRepository.save(ruleName);</span>
+<span class="fc" id="L35">    }</span>
+
     public void deleteRuleName(Integer id){
-<span class="fc" id="L30">        log.info(&quot;Deleting ruleName&quot;);</span>
-<span class="fc" id="L31">        ruleNameRepository.deleteById(id);</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L38">        log.info(&quot;Deleting ruleName&quot;);</span>
+<span class="fc" id="L39">        ruleNameRepository.deleteById(id);</span>
+<span class="fc" id="L40">    }</span>
 
     public Optional&lt;RuleName&gt; getRuleNameById(Integer id) {
-<span class="fc" id="L35">        return ruleNameRepository.findById(id);</span>
+<span class="fc" id="L43">        return ruleNameRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

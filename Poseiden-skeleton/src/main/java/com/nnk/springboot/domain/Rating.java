@@ -1,16 +1,18 @@
 package com.nnk.springboot.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import java.util.Objects;
 
+/**
+ * The entity Rating.
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "rating")
 public class Rating {
 
@@ -24,6 +26,7 @@ public class Rating {
 
     public Rating() {
     }
+
     public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
         this.moodysRating = moodysRating;
         this.sandPRating = sandPRating;
@@ -31,6 +34,12 @@ public class Rating {
         this.orderNumber = orderNumber;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Rating rating = (Rating) o;
+        return id != null && Objects.equals(id, rating.id);
+    }
 
-// TODO: Map columns in data table RATING with corresponding java fields
 }

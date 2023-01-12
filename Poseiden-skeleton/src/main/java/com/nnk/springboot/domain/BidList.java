@@ -1,20 +1,21 @@
 package com.nnk.springboot.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Objects;
 
+/**
+ * The Entity Bid list.
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "bidlist")
 public class BidList {
 
@@ -48,11 +49,21 @@ public class BidList {
     private String sourceListId;
     private String side;
 
+
     public BidList() {
     }
+
     public BidList (String account, String type, Double bidQuantity){
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        BidList bidList = (BidList) o;
+        return id != null && Objects.equals(id, bidList.id);
     }
 }

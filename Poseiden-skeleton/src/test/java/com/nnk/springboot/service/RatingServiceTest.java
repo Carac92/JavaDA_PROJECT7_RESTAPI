@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test for RatingService
+ */
 @RunWith(SpringRunner.class)
 public class RatingServiceTest {
     @InjectMocks

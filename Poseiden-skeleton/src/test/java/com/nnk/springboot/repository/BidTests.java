@@ -12,6 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Unit test for BidListRepository
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BidTests {

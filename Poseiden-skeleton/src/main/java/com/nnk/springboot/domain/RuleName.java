@@ -1,18 +1,20 @@
 package com.nnk.springboot.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
+import java.util.Objects;
 
+/**
+ * The entity Rule name.
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "rule_name")
 public class RuleName {
-// TODO: Map columns in data table RULENAME with corresponding java fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,6 +27,7 @@ public class RuleName {
 
     public RuleName() {
     }
+
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
         this.name = name;
         this.description = description;
@@ -32,5 +35,13 @@ public class RuleName {
         this.template = template;
         this.sqlStr = sqlStr;
         this.sqlPart = sqlPart;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RuleName ruleName = (RuleName) o;
+        return id != null && Objects.equals(id, ruleName.id);
     }
 }

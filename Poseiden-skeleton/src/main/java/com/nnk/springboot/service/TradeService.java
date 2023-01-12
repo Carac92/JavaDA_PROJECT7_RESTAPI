@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Trade service. Autowired TradeRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Service
 @Log4j2
 public class TradeService {
@@ -18,14 +23,17 @@ public class TradeService {
     public List<Trade> getAllTrade(){
         return tradeRepository.findAll();
     }
+
     public void addTrade(Trade trade){
         log.info("Adding trade");
         tradeRepository.save(trade);
     }
+
     public void updateTrade(Trade trade){
         log.info("Updating trade");
         tradeRepository.save(trade);
     }
+
     public void deleteTrade(Integer id){
         log.info("Deleting trade");
         tradeRepository.deleteById(id);

@@ -4,19 +4,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Home controller.
+ */
 @Controller
-<span class="fc" id="L8">public class HomeController</span>
+<span class="fc" id="L11">public class HomeController</span>
 {
-	@RequestMapping(&quot;/&quot;)
+
+    @RequestMapping(&quot;/&quot;)
 	public String home(Model model)
 	{
-<span class="fc" id="L13">		return &quot;home&quot;;</span>
+<span class="fc" id="L17">		return &quot;home&quot;;</span>
 	}
 
-	@RequestMapping(&quot;/admin/home&quot;)
+
+    @RequestMapping(&quot;/admin/home&quot;)
 	public String adminHome(Model model)
 	{
-<span class="nc" id="L19">		return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L24">		return &quot;redirect:/bidList/list&quot;;</span>
 	}
 
 

@@ -9,30 +9,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Rating service. Autowired RatingRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Service
-<span class="fc" id="L13">@Log4j2</span>
-<span class="fc" id="L14">public class RatingService {</span>
+<span class="fc" id="L18">@Log4j2</span>
+<span class="fc" id="L19">public class RatingService {</span>
     @Autowired
     private RatingRepository ratingRepository;
 
     public List&lt;Rating&gt; getAllRating(){
-<span class="fc" id="L19">        return ratingRepository.findAll();</span>
+<span class="fc" id="L24">        return ratingRepository.findAll();</span>
     }
+
     public void addRating(Rating rating){
-<span class="fc" id="L22">        log.info(&quot;Adding rating&quot;);</span>
-<span class="fc" id="L23">        ratingRepository.save(rating);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L28">        log.info(&quot;Adding rating&quot;);</span>
+<span class="fc" id="L29">        ratingRepository.save(rating);</span>
+<span class="fc" id="L30">    }</span>
+
     public void updateRating(Rating rating){
-<span class="fc" id="L26">        log.info(&quot;Updating rating&quot;);</span>
-<span class="fc" id="L27">        ratingRepository.save(rating);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L33">        log.info(&quot;Updating rating&quot;);</span>
+<span class="fc" id="L34">        ratingRepository.save(rating);</span>
+<span class="fc" id="L35">    }</span>
+
     public void deleteRating(Integer id){
-<span class="fc" id="L30">        log.info(&quot;Deleting rating&quot;);</span>
-<span class="fc" id="L31">        ratingRepository.deleteById(id);</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L38">        log.info(&quot;Deleting rating&quot;);</span>
+<span class="fc" id="L39">        ratingRepository.deleteById(id);</span>
+<span class="fc" id="L40">    }</span>
 
     public Optional&lt;Rating&gt; getRatingById(Integer id) {
-<span class="fc" id="L35">        return ratingRepository.findById(id);</span>
+<span class="fc" id="L43">        return ratingRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

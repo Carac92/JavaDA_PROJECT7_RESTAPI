@@ -13,6 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit test for TradeService
+ */
 @RunWith(SpringRunner.class)
 public class TradeServiceTest {
     @InjectMocks

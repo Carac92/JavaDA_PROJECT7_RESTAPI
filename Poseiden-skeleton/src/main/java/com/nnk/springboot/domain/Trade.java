@@ -1,17 +1,22 @@
 package com.nnk.springboot.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 
+/**
+ * The entity Trade.
+ */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name= "trade")
 public class Trade {
 
@@ -45,9 +50,18 @@ public class Trade {
 
     public Trade() {
     }
+
     public Trade(String account, String type) {
         this.account = account;
         this.type = type;
     }
-// TODO: Map columns in data table TRADE with corresponding java fields
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Trade trade = (Trade) o;
+        return id != null && Objects.equals(id, trade.id);
+    }
+
 }

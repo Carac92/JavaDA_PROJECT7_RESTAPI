@@ -9,30 +9,38 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Trade service. Autowired TradeRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Service
-<span class="fc" id="L13">@Log4j2</span>
-<span class="fc" id="L14">public class TradeService {</span>
+<span class="fc" id="L18">@Log4j2</span>
+<span class="fc" id="L19">public class TradeService {</span>
     @Autowired
     private TradeRepository tradeRepository;
 
     public List&lt;Trade&gt; getAllTrade(){
-<span class="fc" id="L19">        return tradeRepository.findAll();</span>
+<span class="fc" id="L24">        return tradeRepository.findAll();</span>
     }
+
     public void addTrade(Trade trade){
-<span class="fc" id="L22">        log.info(&quot;Adding trade&quot;);</span>
-<span class="fc" id="L23">        tradeRepository.save(trade);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L28">        log.info(&quot;Adding trade&quot;);</span>
+<span class="fc" id="L29">        tradeRepository.save(trade);</span>
+<span class="fc" id="L30">    }</span>
+
     public void updateTrade(Trade trade){
-<span class="fc" id="L26">        log.info(&quot;Updating trade&quot;);</span>
-<span class="fc" id="L27">        tradeRepository.save(trade);</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L33">        log.info(&quot;Updating trade&quot;);</span>
+<span class="fc" id="L34">        tradeRepository.save(trade);</span>
+<span class="fc" id="L35">    }</span>
+
     public void deleteTrade(Integer id){
-<span class="fc" id="L30">        log.info(&quot;Deleting trade&quot;);</span>
-<span class="fc" id="L31">        tradeRepository.deleteById(id);</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L38">        log.info(&quot;Deleting trade&quot;);</span>
+<span class="fc" id="L39">        tradeRepository.deleteById(id);</span>
+<span class="fc" id="L40">    }</span>
 
     public Optional&lt;Trade&gt; getTradeById(Integer id) {
-<span class="fc" id="L35">        return tradeRepository.findById(id);</span>
+<span class="fc" id="L43">        return tradeRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

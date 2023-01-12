@@ -21,6 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit test for TradeController
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(TradeController.class)
 @WithMockUser
@@ -32,52 +35,67 @@ public class TradeControllerTest {
 
     @Test
     public void home() throws Exception {
+        //WHEN
         mvc.perform(get("/trade/list").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/list"))
                 .andExpect(model().attributeExists("trades"));
     }
     @Test
     public void addTradeForm() throws Exception {
+        //WHEN
         mvc.perform(get("/trade/add").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/add"))
                 .andExpect(model().attributeExists("trade"));
     }
     @Test
     public void validate() throws Exception {
+        //WHEN
         mvc.perform(post("/trade/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("account=account&type=type")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/trade/list"));
     }
     @Test
     public void showUpdateForm() throws Exception {
+        //GIVEN
         Trade trade = new Trade("account", "type");
+        //WHEN
         when(tradeService.getTradeById(1)).thenReturn(Optional.of(trade));
         mvc.perform(get("/trade/update/1").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/update"))
                 .andExpect(model().attributeExists("trade"));
     }
     @Test
     public void updateTrade() throws Exception {
+        //GIVEN
         Trade trade = new Trade("account", "type");
+        //WHEN
         when(tradeService.getTradeById(1)).thenReturn(Optional.of(trade));
         mvc.perform(post("/trade/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("account=account&type=type")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/trade/list"));
     }
     @Test
     public void deleteTrade() throws Exception {
+        //GIVEN
         Trade trade = new Trade("account", "type");
+        //WHEN
         when(tradeService.getTradeById(1)).thenReturn(Optional.of(trade));
         mvc.perform(get("/trade/delete/1").with(csrf()))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/trade/list"));
     }

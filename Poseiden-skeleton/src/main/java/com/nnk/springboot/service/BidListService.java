@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Bid list service. Autowired BidListRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Log4j2
 @Service
 public class BidListService {
@@ -19,16 +24,19 @@ public class BidListService {
     public List<BidList> getAllBidList() {
         return bidListRepository.findAll();
     }
+
     @Transactional
     public void addBidList(BidList bid){
         log.info("Adding bidList");
         bidListRepository.save(bid);
     }
+
     @Transactional
     public void updateBidList(BidList bidList){
         log.info("Updating bidList");
         bidListRepository.save(bidList);
     }
+
     @Transactional
     public void deleteBidList(Integer id){
         log.info("Deleting bidList");

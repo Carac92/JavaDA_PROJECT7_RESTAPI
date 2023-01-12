@@ -21,7 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+/**
+ * Unit test for RuleNameController
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(RuleNameController.class)
 @WithMockUser
@@ -33,50 +35,64 @@ public class RuleNameControllerTest {
 
     @Test
     public void home() throws Exception {
+        //WHEN
         mvc.perform(get("/ruleName/list").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/list"))
                 .andExpect(model().attributeExists("ruleNames"));
     }
     @Test
     public void addRuleNameForm() throws Exception {
+        //WHEN
         mvc.perform(get("/ruleName/add").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/add"))
                 .andExpect(model().attributeExists("ruleName"));
     }
     @Test
     public void validate() throws Exception {
+        //WHEN
         mvc.perform(post("/ruleName/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("name=name&description=description&json=json&template=template&sqlStr=sqlStr&sqlPart=sqlPart")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/ruleName/list"));
     }
     @Test
     public void showUpdateForm() throws Exception {
+        //GIVEN
         RuleName ruleName = new RuleName("name", "description", "json", "template", "sqlStr", "sqlPart");
+        //WHEN
         when(ruleNameService.getRuleNameById(1)).thenReturn(Optional.of(ruleName));
         mvc.perform(get("/ruleName/update/1").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/update"))
                 .andExpect(model().attributeExists("ruleName"));
     }
     @Test
     public void updateRuleName() throws Exception {
+        //GIVEN
         RuleName ruleName = new RuleName("name", "description", "json", "template", "sqlStr", "sqlPart");
+        //WHEN
         when(ruleNameService.getRuleNameById(1)).thenReturn(Optional.of(ruleName));
         mvc.perform(post("/ruleName/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("name=name&description=description&json=json&template=template&sqlStr=sqlStr&sqlPart=sqlPart")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/ruleName/list"));
     }
     @Test
     public void deleteRuleName() throws Exception {
+        //WHEN
         mvc.perform(get("/ruleName/delete/1").with(csrf()))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/ruleName/list"));
     }

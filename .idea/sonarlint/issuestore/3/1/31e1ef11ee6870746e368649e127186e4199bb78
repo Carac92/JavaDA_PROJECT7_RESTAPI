@@ -1,15 +1,0 @@
-
-o
-java:S1192-"TDefine a constant instead of duplicating this literal "redirect:/user/list" 3 times.(çùÖ©üÿÿÿÿ
-a
-java:S1192"FDefine a constant instead of duplicating this literal "users" 4 times.(¿›€ïúÿÿÿÿ
-V
-java:S4684#"@Replace this persistent entity with a simple POJO or DTO object.(œˆ‘
-[
-java:S4684("@Replace this persistent entity with a simple POJO or DTO object.(¢šßşüÿÿÿÿ
-U
-java:S4684;"@Replace this persistent entity with a simple POJO or DTO object.(¢õ¤`
-T
-java:S1854H"8Remove this useless assignment to local variable "user".(„¨¹X8¡ç„Ú0
-E
-java:S1481H")Remove this unused "user" local variable.(„¨¹X8¡ç„Ú0

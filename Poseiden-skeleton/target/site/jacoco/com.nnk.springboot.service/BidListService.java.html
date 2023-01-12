@@ -10,33 +10,41 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-<span class="fc" id="L13">@Log4j2</span>
+/**
+ * The type Bid list service. Autowired BidListRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
+<span class="fc" id="L18">@Log4j2</span>
 @Service
-<span class="fc" id="L15">public class BidListService {</span>
+<span class="fc" id="L20">public class BidListService {</span>
     @Autowired
     private BidListRepository bidListRepository;
 
     public List&lt;BidList&gt; getAllBidList() {
-<span class="nc" id="L20">        return bidListRepository.findAll();</span>
+<span class="nc" id="L25">        return bidListRepository.findAll();</span>
     }
+
     @Transactional
     public void addBidList(BidList bid){
-<span class="fc" id="L24">        log.info(&quot;Adding bidList&quot;);</span>
-<span class="fc" id="L25">        bidListRepository.save(bid);</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L30">        log.info(&quot;Adding bidList&quot;);</span>
+<span class="fc" id="L31">        bidListRepository.save(bid);</span>
+<span class="fc" id="L32">    }</span>
+
     @Transactional
     public void updateBidList(BidList bidList){
-<span class="fc" id="L29">        log.info(&quot;Updating bidList&quot;);</span>
-<span class="fc" id="L30">        bidListRepository.save(bidList);</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L36">        log.info(&quot;Updating bidList&quot;);</span>
+<span class="fc" id="L37">        bidListRepository.save(bidList);</span>
+<span class="fc" id="L38">    }</span>
+
     @Transactional
     public void deleteBidList(Integer id){
-<span class="fc" id="L34">        log.info(&quot;Deleting bidList&quot;);</span>
-<span class="fc" id="L35">        bidListRepository.deleteById(id);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L42">        log.info(&quot;Deleting bidList&quot;);</span>
+<span class="fc" id="L43">        bidListRepository.deleteById(id);</span>
+<span class="fc" id="L44">    }</span>
 
     public Optional&lt;BidList&gt; getBidListById(Integer id) {
-<span class="fc" id="L39">        return bidListRepository.findById(id);</span>
+<span class="fc" id="L47">        return bidListRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

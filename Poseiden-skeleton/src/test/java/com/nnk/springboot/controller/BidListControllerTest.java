@@ -22,7 +22,9 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+/**
+ * Unit test for BidListController
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(BidListController.class)
 @WithMockUser(username = "admin", password = "mdp123")
@@ -36,50 +38,63 @@ public class BidListControllerTest {
 
     @Test
     public void home() throws Exception {
+        //WHEN
         mvc.perform(get("/bidList/list"))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/list"))
                 .andExpect(model().attributeExists("bidList"));
     }
     @Test
     public void addBidForm() throws Exception {
+        //WHEN
         mvc.perform(get("/bidList/add"))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/add"))
                 .andExpect(model().attributeExists("bidList"));
     }
     @Test
     public void validate() throws Exception {
-        BidList bidList = new BidList("account", "type", 10.0);
+        //WHEN
         mvc.perform(post("/bidList/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("account=account&type=type&bidQuantity=10.0")
-                .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                        .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/list"));
     }
     @Test
     public void showUpdateForm() throws Exception {
+        //GIVEN
         BidList bidList = new BidList("account", "type", 10d);
+        //WHEN
         when(bidListService.getBidListById(1)).thenReturn(Optional.of(bidList));
         mvc.perform(get("/bidList/update/1").with(csrf()))
+                //THEN
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/update"))
                 .andExpect(model().attributeExists("bid"));
     }
     @Test
     public void updateBid() throws Exception {
+        //GIVEN
         BidList bidList = new BidList("account", "type", 10d);
+        //WHEN
         mvc.perform(post("/bidList/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(bidList.toString())
                         .accept(MediaType.APPLICATION_JSON))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/update/{id}"));
     }
     @Test
     public void deleteBid() throws Exception {
+        //WHEN
         mvc.perform(get("/bidList/delete/1").with(csrf()))
+                //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/list"));
     }

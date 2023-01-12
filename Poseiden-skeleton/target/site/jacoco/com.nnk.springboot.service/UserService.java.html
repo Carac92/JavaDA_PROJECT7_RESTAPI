@@ -16,45 +16,59 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User service implements UserDetailsService.
+ * Autowired UserRepository.
+ * Implements CRUD methods.
+ * log each request with log4j2.
+ */
 @Service
-<span class="fc" id="L20">@Log4j2</span>
-<span class="fc" id="L21">public class UserService implements UserDetailsService {</span>
+<span class="fc" id="L26">@Log4j2</span>
+<span class="fc" id="L27">public class UserService implements UserDetailsService {</span>
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="fc" id="L27">        User connectedUser = userRepository.findByUsername(username);</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        if (connectedUser == null) {</span>
-<span class="nc" id="L29">            throw new UsernameNotFoundException(&quot;User not found&quot;);</span>
+<span class="fc" id="L33">        User connectedUser = userRepository.findByUsername(username);</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (connectedUser == null) {</span>
+<span class="nc" id="L35">            log.error(&quot;User not found&quot;);</span>
+<span class="nc" id="L36">            throw new UsernameNotFoundException(&quot;User not found&quot;);</span>
         }
-<span class="fc" id="L31">        GrantedAuthority authority = new SimpleGrantedAuthority(connectedUser.getRole());</span>
-<span class="fc" id="L32">        return new org.springframework.security.core.userdetails.User(connectedUser.getUsername(),</span>
-<span class="fc" id="L33">                connectedUser.getPassword(), Collections.singletonList(authority));</span>
+<span class="fc" id="L38">        log.info(&quot;User found&quot;);</span>
+<span class="fc" id="L39">        GrantedAuthority authority = new SimpleGrantedAuthority(connectedUser.getRole());</span>
+<span class="fc" id="L40">        return new org.springframework.security.core.userdetails.User(connectedUser.getUsername(),</span>
+<span class="fc" id="L41">                connectedUser.getPassword(), Collections.singletonList(authority));</span>
     }
 
     public User getUserByUsername(String username) {
-<span class="fc" id="L37">        return userRepository.findByUsername(username);</span>
+<span class="fc" id="L45">        log.info(&quot;Getting user by username&quot;);</span>
+<span class="fc" id="L46">        return userRepository.findByUsername(username);</span>
     }
+
     public void addUser(User user){
-<span class="fc" id="L40">        log.info(&quot;Adding user&quot;);</span>
-<span class="fc" id="L41">        userRepository.save(user);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L50">        log.info(&quot;Adding user&quot;);</span>
+<span class="fc" id="L51">        userRepository.save(user);</span>
+<span class="fc" id="L52">    }</span>
+
     public List&lt;User&gt; getAllUsers(){
-<span class="nc" id="L44">        log.info(&quot;Getting all users&quot;);</span>
-<span class="nc" id="L45">        return userRepository.findAll();</span>
+<span class="nc" id="L55">        log.info(&quot;Getting all users&quot;);</span>
+<span class="nc" id="L56">        return userRepository.findAll();</span>
     }
+
     public void updateUser(User user){
-<span class="fc" id="L48">        log.info(&quot;Updating user&quot;);</span>
-<span class="fc" id="L49">        userRepository.save(user);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L60">        log.info(&quot;Updating user&quot;);</span>
+<span class="fc" id="L61">        userRepository.save(user);</span>
+<span class="fc" id="L62">    }</span>
+
     public void deleteUser(Integer id){
-<span class="fc" id="L52">        log.info(&quot;Deleting user&quot;);</span>
-<span class="fc" id="L53">        userRepository.deleteById(id);</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L65">        log.info(&quot;Deleting user&quot;);</span>
+<span class="fc" id="L66">        userRepository.deleteById(id);</span>
+<span class="fc" id="L67">    }</span>
 
     public Optional&lt;User&gt; getUserById(Integer id) {
-<span class="nc" id="L57">        return userRepository.findById(id);</span>
+<span class="nc" id="L70">        log.info(&quot;Getting user by id&quot;);</span>
+<span class="nc" id="L71">        return userRepository.findById(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
