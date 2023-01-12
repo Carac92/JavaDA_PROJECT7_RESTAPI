@@ -7,7 +7,5 @@ S
 #Poseiden-skeleton/doc/guideline.txt,b/b/bbb693090dc25796a8857d9eaa086436e33b0972
 K
 Poseiden-skeleton/README.md,e/2/e2f24de19b983e1a25504eb255cea1ff1a21b53f
-I
-Poseiden-skeleton/pom.xml,5/e/5e5bc8e0b77b5294afe321a7732d6db7c935f72a
 N
 Poseiden-skeleton/doc/data.sql,e/7/e7bd94d20dd1aa6065001aebed263cc3b7d996f8
