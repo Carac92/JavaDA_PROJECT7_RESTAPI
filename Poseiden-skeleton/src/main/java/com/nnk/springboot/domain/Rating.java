@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Rating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String moodysRating;
     private String sandPRating;

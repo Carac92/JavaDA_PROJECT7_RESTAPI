@@ -16,7 +16,8 @@ import java.util.Objects;
 @Table(name = "rule_name")
 public class RuleName {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JoinColumn(name = "id", nullable = false)
     private Integer id;
     private String name;
     private String description;

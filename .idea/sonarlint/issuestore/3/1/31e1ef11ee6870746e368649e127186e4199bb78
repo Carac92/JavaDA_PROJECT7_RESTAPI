@@ -1,0 +1,15 @@
+
+o
+java:S11922"TDefine a constant instead of duplicating this literal "redirect:/user/list" 3 times.(çùÖ©üÿÿÿÿ
+a
+java:S1192""FDefine a constant instead of duplicating this literal "users" 4 times.(¿›€ïúÿÿÿÿ
+E
+java:S1066."/Merge this if statement with the enclosing one.(àğë°
+V
+java:S4684'"@Replace this persistent entity with a simple POJO or DTO object.(œˆ‘
+[
+java:S4684,"@Replace this persistent entity with a simple POJO or DTO object.(¢šßşüÿÿÿÿ
+U
+java:S4684A"@Replace this persistent entity with a simple POJO or DTO object.(¢õ¤`
+a
+java:S1128"KRemove this unused import 'com.nnk.springboot.repositories.UserRepository'.(şõÍ™

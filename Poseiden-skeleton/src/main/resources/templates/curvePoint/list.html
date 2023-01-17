@@ -43,8 +43,8 @@
 				<td th:text="${curvePoint.term}"></td>
 				<td th:text="${curvePoint.value}"></td>
 				<td>
-					<a href="/curvePoint/update?id=[(${curvePoint.id})]" class="btn btn-primary btn-sm">Edit</a>
-					<a href="/curvePoint/delete?id=[(${curvePoint.id})]" class="btn btn-primary btn-sm">Delete</a>
+					<a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}" class="btn btn-primary btn-sm">Edit</a>
+					<a th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}" class="btn btn-primary btn-sm">Delete</a>
 				</td>
 			</tbody>
 		</table>
