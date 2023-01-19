@@ -5,6 +5,7 @@
 2. Java 8
 3. Thymeleaf
 4. Bootstrap v.4.3.1
+5. IMPORTANT : RUN ONLY WITH LIBERICA 1.8
 
 
 ## Setup with Intellij IDE
