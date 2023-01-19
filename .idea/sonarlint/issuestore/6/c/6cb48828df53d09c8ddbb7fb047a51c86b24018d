@@ -1,0 +1,7 @@
+
+k
+java:S1206-"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+Z
+java:S1128"=Remove this unused import 'javax.validation.constraints.Min'.(ã¤½8ÚÓ„ÎÜ0
+d
+java:S1128"BRemove this unused import 'javax.validation.constraints.NotBlank'.(µã‡ıÿÿÿÿ8´Â‹ÎÜ0
