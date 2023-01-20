@@ -6,6 +6,8 @@
 3. Thymeleaf
 4. Bootstrap v.4.3.1
 5. IMPORTANT : RUN ONLY WITH LIBERICA 1.8
+6. To run in command line if you have several JRE you can run the following command :
+alias mvn2="JAVA_HOME=pathToLiberica1.8 mvn" and then you can run maven command with mvn2.
 
 
 ## Setup with Intellij IDE
